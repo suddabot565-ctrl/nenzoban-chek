@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080812">
+<title>NENZO FREE FIRE BAN CHECK</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at top, #311052 0%, transparent 45%),
+        linear-gradient(135deg, #080812, #101020, #080812);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px 22px;
+    border: 1px solid #a52bff;
+    border-radius: 22px;
+    background: rgba(12, 12, 28, 0.95);
+    box-shadow: 0 0 25px #8b00ff55,
+                inset 0 0 20px #8b00ff10;
+    text-align: center;
+    animation: appear 0.8s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo {
+    font-size: 48px;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 12px #c000ff);
+}
+
+h1 {
+    font-size: 27px;
+    font-weight: 900;
+    line-height: 1.3;
+    color: #fff;
+    text-shadow: 0 0 12px #b000ff;
+}
+
+h1 span {
+    color: #d66aff;
+}
+
+.subtitle {
+    margin: 12px 0 26px;
+    color: #b8b4ca;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.label {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #e4baff;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #7625a9;
+    border-radius: 12px;
+    outline: none;
+    color: white;
+    background: #090914;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #e35aff;
+    box-shadow: 0 0 15px #b000ff55;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #7900ff, #d000ff);
+    box-shadow: 0 0 18px #a000ff55;
+    transition: 0.25s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px #c000ff99;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #171327;
+    border: 1px solid #7138a0;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.info {
+    margin-top: 24px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #ffffff06;
+    color: #bcb7d0;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.info strong {
+    color: #e4aaff;
+}
+
+.footer {
+    margin-top: 22px;
+    font-size: 11px;
+    color: #82758f;
+    letter-spacing: 1px;
+}
+
+.footer span {
+    color: #d66aff;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">🎮</div>
+
+    <h1>
+        NENZO <span>FREE FIRE</span><br>
+        BAN CHECK
+    </h1>
+
+    <p class="subtitle">
+        ⚡ ACCOUNT STATUS TOOL ⚡
+    </p>
+
+    <label class="label" for="uid">
+        ENTER YOUR FREE FIRE UID
+    </label>
+
+    <input
+        type="text"
+        id="uid"
+        inputmode="numeric"
+        maxlength="20"
+        placeholder="Enter Player UID..."
+        autocomplete="off"
+    >
+
+    <button onclick="checkBan()">
+        🔍 CHECK BAN STATUS
+    </button>
+
+    <div id="result" role="status" aria-live="polite"></div>
+
+    <div class="info">
+        <strong>⚠️ IMPORTANT NOTICE</strong><br>
+        This tool does not have access to Garena's
+        private account database. UID validation
+        alone cannot confirm whether an account is banned.
+        <br><br>
+        <strong>MADE BY NENZO</strong>
+    </div>
+
+    <div class="footer">
+        POWERED BY <span>NENZO</span> ️‍🩹
+    </div>
+
+</div>
+
+<script>
+function checkBan() {
+    const uid = document.getElementById("uid").value.trim();
+    const result = document.getElementById("result");
+
+    result.style.display = "block";
+
+    if (!/^\d{6,20}$/.test(uid)) {
+        result.style.borderColor = "#ff365d";
+        result.innerHTML =
+            "❌ <strong>INVALID UID</strong><br>" +
+            "Please enter a numeric UID containing 6–20 digits.";
+        return;
+    }
+
+    result.style.borderColor = "#b44aff";
+
+    result.innerHTML =
+        "🎮 <strong>UID FORMAT VALID</strong><br>" +
+        "PLAYER UID: " + uid + "<br><br>" +
+        "⚠️ <strong>LIVE BAN STATUS UNAVAILABLE</strong><br>" +
+        "This website cannot access Garena's ban records. " +
+        "Please check your account in Free Fire or contact official support.";
+}
+</script>
+
+</body>
+</html>
